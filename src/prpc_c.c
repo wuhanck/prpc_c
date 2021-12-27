@@ -228,7 +228,7 @@ int prpc_chan_call_exec(struct prpc_chan_st *chan)
 
 	msgpack_object obj = chan->msg_.data;
 	if (obj.type != MSGPACK_OBJECT_ARRAY
-	    && obj.via.array.size != 3)
+	    || obj.via.array.size != 3)
 		goto err_ret_type;
 	msgpack_object *p = obj.via.array.ptr;
 	if (p->type != MSGPACK_OBJECT_POSITIVE_INTEGER)
