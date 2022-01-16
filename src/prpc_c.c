@@ -71,7 +71,7 @@ struct prpc_chan_st *prpc_connect_chan(const char *bus, const char *peer)
 	memcpy(&addr.sun_path[1+pre_len+1], bus, bus_len);
 	memcpy(&addr.sun_path[1+pre_len+1+bus_len+1], peer, peer_len);
 
-	chan->s_ = socket(AF_UNIX, SOCK_SEQPACKET, 0);
+	chan->s_ = socket(AF_UNIX, SOCK_SEQPACKET | SOCK_CLOEXEC, 0);
 	if (chan->s_ == -1)
 		goto err_sock_create;
 
